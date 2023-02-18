@@ -228,7 +228,7 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("assets/css/IMG_2108.jpeg") top center;
+  background: "assets/css/IMG_2108.jpeg" top center;
   background-size: cover;
 }
 
@@ -242,6 +242,8 @@ h6 {
   right: 0;
   z-index: 1;
 }
+
+
 
 #hero .hero-container {
   position: relative;
