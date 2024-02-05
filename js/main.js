@@ -130,17 +130,11 @@
    */
  var video = document.getElementById("videoPlayer");
 
-  // Function to unmute the video when the user interacts with it
-  function unmuteVideo() {
-    video.muted = false;
-    video.removeEventListener("click", unmuteVideo); // Remove the event listener after the first click
-    video.addEventListener("click", playVideo); // Add event listener to play video on click
-  }
-
-  // Function to play the video
+  // Function to play the video when the user explicitly interacts with it
   function playVideo() {
-    video.play();
-    video.removeEventListener("click", playVideo); // Remove the event listener after playing
+    if (video.paused) {
+      video.play();
+    }
   }
 
   // Pause the video when the document is not visible
@@ -158,17 +152,10 @@
     }
   });
 
-  // Play the video when it's scrolled into the viewport and visible
-  window.addEventListener("scroll", function() {
-    var videoRect = video.getBoundingClientRect();
-    if (videoRect.top < window.innerHeight && videoRect.bottom > 0 && document.visibilityState === "visible") {
-      video.play();
-    }
-  });
+  // Listen for user interaction with the video to play it
+  video.addEventListener("click", playVideo);
 
-  // Listen for user interaction with the video to unmute it
-  video.addEventListener("click", unmuteVideo);
-
+  
   /**
    * Hero type effect
    */
