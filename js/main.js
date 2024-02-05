@@ -126,6 +126,42 @@
   });
 
   /**
+   * Play video only when unmuted
+   */
+
+  var video = document.getElementById("videoPlayer");
+
+  // Function to toggle mute/unmute when the user interacts with the video
+  function toggleMute() {
+    video.muted = !video.muted;
+  }
+
+  // Pause the video when the document is not visible
+  document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === "hidden") {
+      video.pause();
+    }
+  });
+
+  // Pause the video when it's not in the viewport
+  window.addEventListener("scroll", function() {
+    var videoRect = video.getBoundingClientRect();
+    if (videoRect.top > window.innerHeight || videoRect.bottom < 0) {
+      video.pause();
+    }
+  });
+
+  // Play the video and unmute it when it's scrolled into the viewport and visible
+  window.addEventListener("scroll", function() {
+    var videoRect = video.getBoundingClientRect();
+    if (videoRect.top < window.innerHeight && videoRect.bottom > 0 && document.visibilityState === "visible") {
+      video.play();
+      video.muted = false; // Unmute the video when it starts playing
+    }
+  });
+
+
+  /**
    * Hero type effect
    */
   const typed = select('.typed')
