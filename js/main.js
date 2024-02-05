@@ -128,13 +128,19 @@
   /**
    * Play video only when unmuted
    */
-
-   var video = document.getElementById("videoPlayer");
+ var video = document.getElementById("videoPlayer");
 
   // Function to unmute the video when the user interacts with it
   function unmuteVideo() {
     video.muted = false;
     video.removeEventListener("click", unmuteVideo); // Remove the event listener after the first click
+    video.addEventListener("click", playVideo); // Add event listener to play video on click
+  }
+
+  // Function to play the video
+  function playVideo() {
+    video.play();
+    video.removeEventListener("click", playVideo); // Remove the event listener after playing
   }
 
   // Pause the video when the document is not visible
